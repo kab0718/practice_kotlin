@@ -22,12 +22,12 @@ fun main(args:Array<String>){
     val strs = arrayOf("red","green","blue") //要素の型から推測できるため型引数は省略できる
     println(strs[0])
 
-    val inst: List<Int> = listOf<Int>(1,2,3)
+    val inst: List<Int> = listOf<Int>(1,2,3) //Listはイミュータブル(変更不可能)
     println("リストの中身は${inst}です")
     println("リストのサイズは${inst.size}です")
     println("リストの要素[1]は${inst[1]}です")
 
-    val chars:MutableList<Char> = mutableListOf('a','b')
+    val chars:MutableList<Char> = mutableListOf('a','b') //ミュータブル(変更可能)なList
     println("以下はmutablelistで変更可能となったリストです")
     println("中身は${chars}です")
     chars[0] = 'c'
@@ -39,20 +39,22 @@ fun main(args:Array<String>){
     println("要素${chars.removeAt(0)}を削除")
     println("中身が${chars}になりました")
 
-    val chset:MutableSet<Char> = mutableSetOf('s','c','s','q')
+    val chset:MutableSet<Char> = mutableSetOf('s','c','s','q') //setは要素の重複がない(1,1)と(1,1,1)は同義
     println("セットの中身は${chset}です")
     chset -= 'c'
     println("セットの中身が${chset}に変わりました")
 
-    val numberMap:MutableMap<String,Int> = mutableMapOf("one" to 1, "two" to 2)
+    val numberMap:MutableMap<String,Int> = mutableMapOf("one" to 1, "two" to 2) //キーと値をセットで保持
     println("マップの中身は${numberMap}です")
     println("キーが[one]の時の値は${numberMap["one"]}です")
     println("キーが[three]の時の値は${numberMap["three"]}です")
     numberMap += "three" to 3
     println("キーと値が追加されました。\nキーが[three]の時の値は${numberMap["three"]}です")
 
+    //Listは順序付き、setは集合、mapはキーと値を保持
+
     println((1..10).toList())
-    println((1000 downTo 0 step 200).toList())
+    println((1000 downTo 0 step 200).toList()) //1000から0の間で200刻み
 
     val score = 74
     if(score >= 60){
@@ -108,7 +110,7 @@ fun main(args:Array<String>){
         println(i)
     }
 
-/* 謎のwarnigが出てくるからコメントアウト
+
     var mIndex = -1
     for(index in names.indices){
         //"みく"が見つかったらループから抜ける
@@ -118,7 +120,7 @@ fun main(args:Array<String>){
         }
         println(names[index])
     }
-*/
+
 
     loop@ for(x in 1..10){
         for(y in 1..10){

@@ -38,6 +38,14 @@ tailrec fun sum4(numbers:List<Long>, accumulator:Long = 0):Long = //計算の途
     if(numbers.isEmpty()) accumulator
     else sum4(numbers.drop(1), accumulator + numbers.first())
 
+//ローカル関数
+fun sum5(numbers:List<Long>):Long {
+    tailrec fun go(numbers:List<Long>, accumulator: Long):Long =
+        if(numbers.isEmpty()) accumulator
+        else go(numbers.drop(1), accumulator + numbers.first())
+    return go(numbers, 0)
+}
+
 fun main(args:Array<String>){
     val result = succ(31)
     val ints = intArrayOf(3,2,10)
@@ -55,4 +63,15 @@ fun main(args:Array<String>){
     println(sum2(4,1,8))
     println(sum2(*ints)) //可変長引数として配列を渡すために*を使っている
     println(tco)
+    //println(sum5((1L..123456).toList()))
+}
+
+class Counter{
+    private var cnt = 0
+
+    fun countUp():Unit{ //本来返り値の型Unitとreturn Unitは省略する
+        cnt++
+    }
+
+    fun getcount():Int = cnt
 }

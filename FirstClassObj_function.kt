@@ -45,11 +45,34 @@ fun firstUpperCase(str:String):Int{
     return first(str, ::isUpper)
 }
 
+//ラムダ式と高階関数の組み合わせ
+fun firstWhitespace(str:String): Int =
+    first(str,{it.isWhitespace()})
+    //first(str){it.isWhitespace}でも可
+
 fun main(args:Array<String>){
     val functionObject = ::square //関数オブジェクトを変数に代入
     //型を明示的に指定した場合
     val functionObject2: (Int) -> Int = ::square //(Int)->intが型で,Intの引数を一つ取りIntの値を返す関数を示す
 
+    //ラムダ式
+    val square_lambda: (Int) -> Int = {
+        i: Int -> i*i
+    }
+    //ラムダ式でも型推論は働く。省略の仕方が2種類ある
+    val square1_lambda = {
+        i: Int -> i*i
+    }
+    val square2_lambda: (Int) -> Int = {
+        i -> i*i
+    }
+
+    //引数が1つの時に限り暗黙の変数itを利用可能
+    val square3_lambda: (Int) -> Int = {
+        it*it
+    }
+
     println(functionObject(5))
     println(functionObject2(3))
+    println(square_lambda(7))
 }

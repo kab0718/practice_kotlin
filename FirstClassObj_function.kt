@@ -98,10 +98,6 @@ fun main(args:Array<String>){
     println(counter1())
     println(counter2())
 
-    log{
-        "このメッセージは表示される"
-    }
-    log(false){
-        "このメッセージは表示されない"
-    }
+    log(true){"このメッセージは表示される"} //ラムダ式を引数としている。
+    log(false){"このメッセージは表示されない"}
 }

@@ -50,6 +50,11 @@ fun firstWhitespace(str:String): Int =
     first(str,{it.isWhitespace()})
     //first(str){it.isWhitespace}でも可
 
+fun getCounter(): () -> Int{
+    var cnt = 0
+    return { cnt++ }
+}
+
 fun main(args:Array<String>){
     val functionObject = ::square //関数オブジェクトを変数に代入
     //型を明示的に指定した場合
@@ -72,7 +77,17 @@ fun main(args:Array<String>){
         it*it
     }
 
+    //クロージャ
+    val counter1 = getCounter()
+    val counter2 = getCounter()
+
     println(functionObject(5))
     println(functionObject2(3))
     println(square_lambda(7))
+
+    println(counter1())
+    println(counter1())
+    println(counter2())
+    println(counter1())
+    println(counter2())
 }

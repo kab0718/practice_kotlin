@@ -55,6 +55,13 @@ fun getCounter(): () -> Int{
     return { cnt++ }
 }
 
+//インライン関数
+inline fun log(debug:Boolean = true, message:() -> String){
+    if(debug){
+        println(message())
+    }
+}
+
 fun main(args:Array<String>){
     val functionObject = ::square //関数オブジェクトを変数に代入
     //型を明示的に指定した場合
@@ -90,4 +97,11 @@ fun main(args:Array<String>){
     println(counter2())
     println(counter1())
     println(counter2())
+
+    log{
+        "このメッセージは表示される"
+    }
+    log(false){
+        "このメッセージは表示されない"
+    }
 }

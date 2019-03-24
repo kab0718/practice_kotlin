@@ -81,6 +81,34 @@ fun createBucket2(_capacity:Int):Bucket2 = object:Bucket2{
     }
 }
 
+//クラス
+class BucketImpl(_capacity:Int):Bucket2{
+
+    override val capacity = _capacity
+
+    override var quantity:Int = 0
+
+    override fun fill(){
+        quantity = capacity
+    }
+
+    override fun drainAway(){
+        quantity = 0
+    }
+
+    override fun pourTo(that:Bucket2){
+        val thatVacuity = that.capacity - that.quantity
+        if(capacity <= thatVacuity){
+            that.quantity += quantity
+            drainAway()
+        }
+        else{
+            that.fill()
+            quantity -= thatVacuity
+        }
+    }
+}
+
 fun main(args:Array<String>){
     //オブジェクトの生成
     val bucket = object{
@@ -112,6 +140,7 @@ fun main(args:Array<String>){
     bucket.printQuantity()
 
     //インタフェース
+    //インタフェースを定義することでオブジェクトに型を与えることができる
     //容量12のバケツ
     val bucket2 = createBucket(12)
     //容量7のバケツ
@@ -141,4 +170,13 @@ fun main(args:Array<String>){
     println(bucket4.quantity)
     println(bucket5.quantity)
 
+    //クラス
+    val bucket6:Bucket2 = BucketImpl(9)
+    val bucket7:Bucket2 = BucketImpl(7)
+
+    bucket6.fill()
+    bucket6.pourTo(bucket7)
+
+    println(bucket6.quantity)
+    println(bucket7.quantity)
 }

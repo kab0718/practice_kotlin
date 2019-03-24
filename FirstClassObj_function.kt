@@ -106,6 +106,13 @@ fun main(args:Array<String>){
         it*it
     }
 
+    //無名関数
+    val square2: (Int) -> Int = fun(i:Int):Int{
+        return i*i
+    }
+    //省略ver
+    val square3: (Int) -> Int = fun(i:Int) = i*i
+
     //クロージャ
     val counter1 = getCounter()
     val counter2 = getCounter()

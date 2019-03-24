@@ -62,6 +62,28 @@ inline fun log(debug:Boolean = true, message:() -> String){
     }
 }
 
+
+inline fun forEach(str:String, f:(Char) -> Unit){
+    for(c in str){ //引数の各文字に対して順番に関数を呼び出す
+        f(c)
+    }
+}
+//非ローカルリターン
+fun containsDigit(str:String): Boolean{
+    forEach(str){if(it.isDigit()) return true} //引数の文字列に数字が含まれていればtrueを返す
+    return false
+}
+//ラベルへのリターン
+fun containsDigit2(str:String): Boolean{
+    var result = false
+    forEach(str) here@{
+        if(it.isDigit()){
+            result = true
+            return@here
+        }
+    }
+    return result
+}
 fun main(args:Array<String>){
     val functionObject = ::square //関数オブジェクトを変数に代入
     //型を明示的に指定した場合

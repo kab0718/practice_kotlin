@@ -1,21 +1,25 @@
 class MyClass
+
 //メソッド
 class Greeter{
     fun greet(name:String){
         println("Hello, $name")
     }
 }
+
 //プロパティ
 class Person{
     var name:String = "."
     var age:Int = 0
     //nameとageは自動的にバッキングフィールドが生成される
+
     //バッキングフィールドを持たないプロパティはカスタムゲッターを持つ
     val nameLength:Int
         get():Int{  //カスタムゲッターは対応するプロパティのあとに関数の様に記述する
             return this.name.length
         }
     //get() = this.name.lengthと省略することが出来る
+
     //カスタムゲッターとは逆に値を設定するカスタムセッターもある
     var height:Int = 0
         set(value){
@@ -23,6 +27,25 @@ class Person{
             field = value
         }
 }
+
+//コンストラクタ
+//class Rational constructor(n:Int, d:Int)
+class Rational(val numerator:Int, val denominator:Int){
+    //val numerator:Int = n
+    //val denominator:Int = d
+
+    //セカンダリコンストラクタは複数作ることが出来る
+    //denominatorに自動で1を設定するセカンダリコンストラクタ
+    constructor(numerator:Int):this(numerator,1)
+
+    //イニシャライザ
+    init{
+        //要求に反した場合、例外をスローする標準ライブラリの関数
+        require(denominator != 0)
+    }
+}
+
+
 
 fun main(args:Array<String>){
     val myClass:MyClass = MyClass() //変数myClassの型はMyClass
@@ -45,4 +68,15 @@ fun main(args:Array<String>){
 
     hanako.height = 160
     println(hanako.height)
+
+    //コンストラクタ
+    val half = Rational(1,2)
+    println(half.numerator)
+    println(half.denominator)
+
+    println("${half.numerator}/${half.denominator}")
+    val five = Rational(5)
+    println("${five.numerator}/${five.denominator}")
+    Rational(1,1)
+    Rational(1,0) //IllegalArgumentExceptionが投げられる
 }

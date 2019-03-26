@@ -45,6 +45,14 @@ class Rational(val numerator:Int, val denominator:Int){
     }
 }
 
+//エクステンション(拡張関数や拡張プロパティ)
+//拡張関数ver
+fun String.countWords():Int =
+    this.split("""\s+""".toRegex()).size //空白文字で分割して作ったリストの要素数を返す
+//拡張プロパティver
+val String.wordsCount:Int
+    get() = split("""\s+""".toRegex()).size
+
 
 
 fun main(args:Array<String>){
@@ -78,5 +86,9 @@ fun main(args:Array<String>){
     val five = Rational(5)
     println("${five.numerator}/${five.denominator}")
     Rational(1,1)
-    Rational(1,0) //IllegalArgumentExceptionが投げられる
+    //Rational(1,0) //IllegalArgumentExceptionが投げられる
+
+    //エクステンション
+    println("I like Kotlin".countWords())
+    println("I don't use Java".wordsCount)
 }

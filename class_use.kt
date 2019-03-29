@@ -30,4 +30,9 @@ fun main(args:Array<String>){
 
     val student2:Student2 = Student2("七尾",712)
     student2.introduceMyself()
+
+    //スーパクラスとサブクラス
+    val person2:Person = Student2("伊藤",39) //実態はStudent2インスタンスだが見かけ上の方はPerson
+    person2.introduceMyself()
+    //person.id エラーが出るためコメントアウト
 }

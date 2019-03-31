@@ -35,6 +35,8 @@ class JapaneseGreeter(target:String):Greeter(target){
         println("こんにちは、$target!")
     }
 }
+//抽象クラスは抽象メンバが持てたり、インスタンス化が出来ないだけで他は通常クラスと一緒
+
 
 //継承の記述を省略した場合自動的にクラスAnyを継承することになる
 fun main(args:Array<String>){

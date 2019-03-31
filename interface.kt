@@ -84,6 +84,55 @@ class Baz:Ber{
     override fun ccc(){}
 }
 
+//デリゲーション
+interface Greet{
+    fun sayHello(target:String)
+    fun sayHello()
+}
+
+open class JapaneseGreeter:Greet{
+    override fun sayHello(target:String){
+        println("こんにちは、${target}さん")
+    }
+    override fun sayHello(){
+        println("こんにちは、匿名さん")
+    }
+}
+
+//デリゲーション...あるオブジェクトの仕事を別のオブジェクトに任せる
+class JapaneseGreeterWithRecording:Greet{
+
+    private val greeter:Greet = JapaneseGreeter()
+
+    private val _targets:MutableSet<String> = mutableSetOf()
+
+    val targets:Set<String>
+        get() = _targets
+
+    override fun sayHello(){
+        greeter.sayHello()
+    }
+
+    override fun sayHello(target:String){
+        _targets += target
+        greeter.sayHello(target)
+    }
+}
+
+//クラスデリゲーション
+class GreeterWithRecording2(private val greeter:Greet):Greet by greeter{
+    //by greeterは「このクラスはインタフェースGreetを実装するけどオーバーライドしてないメンバはgreeterに移譲する」という表記
+    private val _targets:MutableSet<String> = mutableSetOf()
+
+    val targets:Set<String>
+        get() = _targets
+
+    override fun sayHello(target:String){
+        _targets += target
+        greeter.sayHello(target)
+    }
+}
+
 fun main(args:Array<String>){
     val english:EnglishGreeter = EnglishGreeter()
     english.sayHello(english.language)
@@ -97,4 +146,15 @@ fun main(args:Array<String>){
 
     val hogefuga:HogeFuga = HogeFuga()
     hogefuga.execute()
+
+    val greeter:JapaneseGreeter = JapaneseGreeter()
+    greeter.sayHello()
+    greeter.sayHello("みく")
+
+    val greeter2:JapaneseGreeterWithRecording = JapaneseGreeterWithRecording()
+    greeter2.sayHello("伊藤")
+    greeter2.sayHello("夏川")
+    println(greeter2.targets)
+    greeter2.sayHello()
+    println(greeter2.targets)
 }

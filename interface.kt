@@ -61,11 +61,27 @@ interface Fuga{
 }
 
 class HogeFuga:Hoge,Fuga{
-    //このままではどちらのexecuteを使うかあいまいなためコンパイルに失敗する
+    //このままではどちらのexecuteを使うか曖昧なためコンパイルに失敗する
     //この場合既に提供されている実装を使いたくてもオーバーライドする必要がある
     override fun execute(){
         super<Hoge>.execute() //これでオーバーライドしたうえでインタフェースHogeの実装を利用できる
     }
+}
+
+//インタフェースの継承
+interface Fuu{
+    fun aaa()
+    fun bbb()
+}
+
+interface Ber:Fuu{
+    override fun aaa(){}
+    fun ccc()
+}
+
+class Baz:Ber{
+    override fun bbb(){}
+    override fun ccc(){}
 }
 
 fun main(args:Array<String>){

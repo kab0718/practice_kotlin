@@ -32,4 +32,14 @@ fun main(args:Array<String>){
     //letはレシーバをletの引数である関数オブジェクトの引数として渡しているため、結果的にsquare関数にfを渡している
     println(fSquare)
 
+    // !!演算子
+    //nullとなり得る型の参照を強制的にnullとなり得ない型に変換する演算子
+    val foo:String? = "Hello"
+    val bar:String = foo!!
+    println(bar.toUpperCase())
+    //ただしnullに対しては例外を投げる
+    val hoge:String? = null
+    //val fuga:String = hoge!!
+    //!!演算子は危険なのでどうしても変換したい場合は標準ライブラリの提供する関数を使う
+    val fuga:String = requireNotNull(hoge,{"hogeはnullであってはいけない"})
 }

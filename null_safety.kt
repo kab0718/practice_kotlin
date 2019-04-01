@@ -41,5 +41,12 @@ fun main(args:Array<String>){
     val hoge:String? = null
     //val fuga:String = hoge!!
     //!!演算子は危険なのでどうしても変換したい場合は標準ライブラリの提供する関数を使う
-    val fuga:String = requireNotNull(hoge,{"hogeはnullであってはいけない"})
+    //val fuga:String = requireNotNull(hoge,{"hogeはnullであってはいけない"}) //例外を投げるのは同じだが、関数と例外メッセージで意図を表現できる
+
+    //エルビス演算子
+    //nullで無ければそれを使用しnullだったらデフォルト値を使う
+    val fee:String? = "Hello"
+    println((fee ?:"default").toUpperCase())
+    val faa:String? = null
+    println(faa ?:"default")
 }

@@ -49,4 +49,8 @@ fun main(args:Array<String>){
     println((fee ?:"default").toUpperCase())
     val faa:String? = null
     println(faa ?:"default")
+
+    //安全キャスト
+    val str:Any = "本当は文字列"
+    println(str as? Int) //as?を使うことでキャストに失敗したときにnullを返す
 }

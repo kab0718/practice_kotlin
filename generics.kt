@@ -7,6 +7,17 @@ fun <T> box(value:T):Container<T> = Container(value)
 val <T> T.string:String
     get() = toString()
 
+//ジェネリック制約
+interface Hoge
+interface Fuga
+interface Piyo:Hoge,Fuga
+
+class Foo<T>
+class Bar<T:Hoge> //上限境界として型を指定
+//複数指定も可
+class Baz<T> where T:Hoge, T:Fuga
+//指定可能な型引数の型は上限境界の型のサブタイプでならないといけないという制約
+
 fun main(args:Array<String>){
     //導入
     val intContainer:Container<Int> = Container<Int>(123)
@@ -20,4 +31,11 @@ fun main(args:Array<String>){
     val container:Container<Int> = box(5)
     println(container.value)
     println(container.string)
+
+    //制約
+    Foo<Hoge>()
+    Foo<Fuga>()
+    Bar<Hoge>()
+    //Bar<Fuga>() コンパイルエラーが発生する
+    Baz<Piyo>()
 }

@@ -18,6 +18,9 @@ class Bar<T:Hoge> //上限境界として型を指定
 class Baz<T> where T:Hoge, T:Fuga
 //指定可能な型引数の型は上限境界の型のサブタイプでならないといけないという制約
 
+//具象型
+inline fun <reified T> Any.instanceOf():Boolean = this is T
+
 fun main(args:Array<String>){
     //導入
     val intContainer:Container<Int> = Container<Int>(123)
@@ -37,5 +40,10 @@ fun main(args:Array<String>){
     Foo<Fuga>()
     Bar<Hoge>()
     //Bar<Fuga>() コンパイルエラーが発生する
-    Baz<Piyo>()
+    Baz<Piyo>() //HogeとFugaが上限境界でHogeとFugaを実装しているPiyoを型引数にとっても問題ない
+
+    //スター投影
+    val a:Container<*> = Container<Int>(5)
+    val b:Container<*> = Container<String>("ABC")
+    //スター投影を行うと対象の型パラメータに対応するオブジェクトの変更が行えなくなる
 }
